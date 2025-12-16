@@ -42,23 +42,49 @@ O foco não é apenas treinar um modelo de previsão de preços de casas, mas es
 A organização do projeto segue o princípio de *Separation of Concerns*, onde cada componente tem uma responsabilidade única.
 
 ```
-MLOpsProject/
-├── .venv/                  # Ambiente virtual isolado
-├── config/                 # Arquivos de configuração (YAML)
+ml_ops_enterprise/
+├── .github/
+│   └── workflows/
+│       └── main.yml        # Define o pipeline de CI/CD com GitHub Actions.
+├── .gitignore              # Arquivos e diretórios a serem ignorados pelo Git.
+├── config/
+│   ├── data/
+│   │   └── raw.yaml        # Configurações para os dados brutos (ex: paths).
 │   └── model/
-│       └── random_forest.yaml # Hiperparâmetros do modelo
-├── mlruns/                 # Armazenamento local de artefatos do MLflow
-├── src/                    # Código fonte modular
-│   ├── data_prep/          # Scripts de carga e divisão de dados
-│   ├── features/           # Módulos de engenharia de features
-│   └── models/             # Lógica de treinamento do modelo
-├── tests/                  # Testes de unidade e integração
-│   └── integration/
-│       └── test_model_integrity.py # Valida o contrato do modelo
-├── Makefile                # Orquestrador de comandos e pipeline
-├── MLproject               # Define o entry point para o MLflow Project
-├── mlflow.db               # Banco de dados SQLite para o backend do MLflow
-└── requirements.txt        # Dependências do projeto
+│       └── random_forest.yaml # Hiperparâmetros e configurações do modelo.
+├── data/
+│   ├── 01_raw/             # Armazena os dados brutos (não versionados).
+│   ├── 02_processed/       # Armazena os dados processados.
+│   └── 03_features/        # Armazena os dados após a engenharia de features.
+├── scripts/
+│   ├── buid_project.sh     # Script para construir o projeto (ex: build de imagem Docker).
+│   └── tree.conf           # Configuração que contém a estrutura de diretórios e arquivos que serão criados.
+├── src/
+│   ├── __init__.py         # Torna o diretório 'src' um pacote Python.
+│   ├── data_prep/
+│   │   ├── __init__.py
+│   │   └── extractor.py    # Scripts para extrair e carregar os dados.
+│   ├── features/
+│   │   ├── __init__.py
+│   │   └── transformer.py  # Módulos para engenharia e transformação de features.
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── train.py        # Lógica para treinamento e avaliação do modelo.
+│   ├── serving/
+│   │   ├── __init__.py
+│   │   └── api.py          # Código para servir o modelo como uma API (ex: com FastAPI).
+│   └── validation/
+│       └── schema.py       # Define o esquema de validação dos dados de entrada.
+├── tests/
+│   ├── integration/
+│   │   └── test_model_integrity.py # Testes de integração para validar a integridade do modelo.
+│   └── unit/               # Diretório para testes de unidade.
+├── conda.yaml              # Dependências do projeto para ambientes Conda.
+├── Dockerfile              # Define a imagem Docker para a aplicação.
+├── Makefile                # Orquestrador de comandos para automação de tarefas (ex: `make train`).
+├── MLproject               # Define a estrutura e os entry points para o MLflow Projects.
+├── README.md               # Documentação do projeto.
+└── requirements.txt        # Dependências do projeto para ambientes pip.
 ```
 
 ---
