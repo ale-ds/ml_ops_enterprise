@@ -1,0 +1,11 @@
+# Parâmetros de Treino
+model_name: RandomForestRegressor
+params:
+  n_estimators: 600         # Número de árvores
+  max_depth: 50             # Profundidade máxima da árvore
+  min_samples_leaf: 3       # Número mínimo de amostras em um nó folha
+  random_state: 42
+
+# Parâmetros de Experimentação e MLflow
+experiment_name: California_Housing_Enterprise
+registered_model_name: CaliforniaRFModel_Prod

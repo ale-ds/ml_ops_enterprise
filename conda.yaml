@@ -1,0 +1,9 @@
+name: enterprise_mlops_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - -r requirements.txt # Lê todas as dependências do nosso requirements.txt

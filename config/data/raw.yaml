@@ -1,0 +1,16 @@
+# Configurações de Split
+split:
+  test_size: 0.2
+  random_state: 42
+  
+#   Schema Básico (para Data Validation)
+target_feature: MedHouseVal
+features:
+  - MedInc
+  - HouseAge
+  - AveRooms
+  - AveBedrms
+  - Population
+  - AveOccup
+  - Latitude
+  - Longitude

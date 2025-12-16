@@ -1,0 +1,39 @@
+# .github/workflows/main.yml
+name: MLOps CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  mlops-pipeline:
+    runs-on: ubuntu-latest
+    
+    # Define o ambiente para o pipeline
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Dependencies
+        run: pip install -r requirements.txt mlflow
+        
+      # O Quality Gate de Código
+      - name: Run Pytest and Quality Checks
+        run: pytest tests/integration/
+        
+      # O Pipeline MLOps real
+      - name: Run MLflow Training
+        # Este comando usa o MLproject para rodar a pipeline de treino e logar artefatos
+        run: mlflow run .
+        
+      # --- PRÓXIMOS PASSOS (Não implementados aqui, mas essenciais em CI/CD) ---
+      # 1. Avaliar Desempenho (comparar nova métrica com baseline)
+      # 2. Promover modelo (se a métrica for melhor) para o estágio Staging
+      # 3. Disparar o Deploy (usando o Dockerfile)

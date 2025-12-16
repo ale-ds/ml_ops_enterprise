@@ -1,0 +1,11 @@
+# MLproject
+name: california-housing-enterprise-mlops
+
+# Define o ambiente de execução
+conda_env: conda.yaml
+
+entry_points:
+  # O comando principal que roda toda a pipeline de MLOps
+  main:
+    # command: "python --version"
+    command: "python src/models/train.py"
